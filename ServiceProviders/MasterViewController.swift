@@ -25,6 +25,9 @@ class MasterViewController: UITableViewController {
                 if let responseProviders = resData["serviceproviders"] as! [[String:Any]]? {
                     debugPrint("responseProviders:", responseProviders)
                     self.objects = responseProviders;
+//                    self.objects = responseProviders.sorted(by: {
+//                        $0["name"] < $1["name"]
+//                    })
                     self.tableView?.reloadData();
                 }
 
