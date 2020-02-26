@@ -14,57 +14,27 @@ class MasterViewController: UITableViewController {
     
     var service:ServiceProviderService? = nil;
     var detailViewController: DetailViewController? = nil
-    var objects = [Any]()
+    var objects = [[String:Any]]()
     var url = "http://private-895ba-angieslistcodingchallenge.apiary-mock.com/angieslist/codingChallenge/serviceproviders";
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        AF.request(url).responseJSON { response in
-            let jsonResponse = JSON(response.value!);
-            if let resData = jsonResponse["serviceproviders"].arrayObject {
-                debugPrint("resData:", resData)
-                self.objects = resData;
-                self.tableView?.reloadData();
+        AF.request(url).responseJSON { (response) in
+            if let resData = response.value as! [String:Any]? {
+                if let responseProviders = resData["serviceproviders"] as! [[String:Any]]? {
+                    debugPrint("responseProviders:", responseProviders)
+                    self.objects = responseProviders;
+                    self.tableView?.reloadData();
+                }
+
             }
         };
-        
-        // Do any additional setup after loading the view.
-        navigationItem.leftBarButtonItem = editButtonItem
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
-        if let split = splitViewController {
-            let controllers = split.viewControllers
-            detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
-    }
-
-    @objc
-    func insertNewObject(_ sender: Any) {
-        objects.insert(NSDate(), at: 0)
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
-    }
-
-    // MARK: - Segues
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-                detailViewController = controller
-            }
-        }
     }
 
     // MARK: - Table View
@@ -78,9 +48,12 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let object = objects[indexPath.row]
-        cell.textLabel!.providerName = object.name;
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceProviderTableViewCell", for: indexPath) as! ServiceProviderTableViewCell;
+        if (self.objects.count > 0) {
+            let provider = objects[indexPath.row]
+            cell.providerName?.text = provider["name"] as? String
+            cell.reviewCount?.text = provider["reviewCount"] as? String
+        }
         return cell
     }
 
