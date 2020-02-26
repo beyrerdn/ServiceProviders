@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,10 @@
 		E3B475E12405DD6600870C1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B475DF2405DD6600870C1C /* Main.storyboard */; };
 		E3B475E32405DD6800870C1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3B475E22405DD6800870C1C /* Assets.xcassets */; };
 		E3B475E62405DD6800870C1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3B475E42405DD6800870C1C /* LaunchScreen.storyboard */; };
+		E3B476072405E41B00870C1C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = E3B476062405E41B00870C1C /* Alamofire */; };
+		E3B476092405E45400870C1C /* ServiceProviderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B476082405E45400870C1C /* ServiceProviderService.swift */; };
+		E3B4760C2405EB5800870C1C /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = E3B4760B2405EB5800870C1C /* SwiftyJSON */; };
+		E3B4760E2405F80D00870C1C /* ServiceProviderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B4760D2405F80D00870C1C /* ServiceProviderTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,8 @@
 		E3B475E22405DD6800870C1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E3B475E52405DD6800870C1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3B475E72405DD6800870C1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3B476082405E45400870C1C /* ServiceProviderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderService.swift; sourceTree = "<group>"; };
+		E3B4760D2405F80D00870C1C /* ServiceProviderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3B4760C2405EB5800870C1C /* SwiftyJSON in Frameworks */,
+				E3B476072405E41B00870C1C /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,11 +69,13 @@
 				E3B475D72405DD6600870C1C /* AppDelegate.swift */,
 				E3B475D92405DD6600870C1C /* SceneDelegate.swift */,
 				E3B475DB2405DD6600870C1C /* MasterViewController.swift */,
+				E3B4760D2405F80D00870C1C /* ServiceProviderTableViewCell.swift */,
 				E3B475DD2405DD6600870C1C /* DetailViewController.swift */,
 				E3B475DF2405DD6600870C1C /* Main.storyboard */,
 				E3B475E22405DD6800870C1C /* Assets.xcassets */,
 				E3B475E42405DD6800870C1C /* LaunchScreen.storyboard */,
 				E3B475E72405DD6800870C1C /* Info.plist */,
+				E3B476082405E45400870C1C /* ServiceProviderService.swift */,
 			);
 			path = ServiceProviders;
 			sourceTree = "<group>";
@@ -86,6 +96,10 @@
 			dependencies = (
 			);
 			name = ServiceProviders;
+			packageProductDependencies = (
+				E3B476062405E41B00870C1C /* Alamofire */,
+				E3B4760B2405EB5800870C1C /* SwiftyJSON */,
+			);
 			productName = ServiceProviders;
 			productReference = E3B475D42405DD6600870C1C /* ServiceProviders.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +128,10 @@
 				Base,
 			);
 			mainGroup = E3B475CB2405DD6600870C1C;
+			packageReferences = (
+				E3B476052405E41B00870C1C /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E3B4760A2405EB5800870C1C /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = E3B475D52405DD6600870C1C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -145,6 +163,8 @@
 				E3B475DA2405DD6600870C1C /* SceneDelegate.swift in Sources */,
 				E3B475DC2405DD6600870C1C /* MasterViewController.swift in Sources */,
 				E3B475DE2405DD6600870C1C /* DetailViewController.swift in Sources */,
+				E3B4760E2405F80D00870C1C /* ServiceProviderTableViewCell.swift in Sources */,
+				E3B476092405E45400870C1C /* ServiceProviderService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +362,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E3B476052405E41B00870C1C /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+		E3B4760A2405EB5800870C1C /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E3B476062405E41B00870C1C /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E3B476052405E41B00870C1C /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		E3B4760B2405EB5800870C1C /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E3B4760A2405EB5800870C1C /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E3B475CC2405DD6600870C1C /* Project object */;
 }

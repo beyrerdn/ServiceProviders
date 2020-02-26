@@ -7,15 +7,28 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class MasterViewController: UITableViewController {
-
+    
+    var service:ServiceProviderService? = nil;
     var detailViewController: DetailViewController? = nil
     var objects = [Any]()
+    var url = "http://private-895ba-angieslistcodingchallenge.apiary-mock.com/angieslist/codingChallenge/serviceproviders";
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        AF.request(url).responseJSON { response in
+            let jsonResponse = JSON(response.value!);
+            if let resData = jsonResponse["serviceproviders"].arrayObject {
+                debugPrint("resData:", resData)
+                self.objects = resData;
+                self.tableView?.reloadData();
+            }
+        };
+        
         // Do any additional setup after loading the view.
         navigationItem.leftBarButtonItem = editButtonItem
 
@@ -66,8 +79,8 @@ class MasterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let object = objects[indexPath.row]
+        cell.textLabel!.providerName = object.name;
         return cell
     }
 
